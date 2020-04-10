@@ -1,10 +1,13 @@
 import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet,
+import {View, Text, Button, StyleSheet,
     TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
 import Card from "./Card";
 import Colors from "../constants/Colors";
 import Input from "./Input";
 import NumberContainer from "./NumberContainer";
+import BodyText from "./BodyText";
+import TitleText from "./TitleText";
+import MainButton from "./MainButton";
 
 const StartGameScreen = (props) => {
     const [enteredValue, setEnteredValue] = useState('');
@@ -39,9 +42,13 @@ const StartGameScreen = (props) => {
     if (confirmed) {
         confirmedOutput = (
             <Card style={styles.summaryContainer}>
-                <Text> You selected: </Text>
+                <BodyText> You selected: </BodyText>
                 <NumberContainer>{selectedNumber}</NumberContainer>
-                <Button title="START GAME" onPress={()=> props.onStartGame(selectedNumber)}/>
+                <MainButton
+                    onPress={()=> props.onStartGame(selectedNumber)}
+                >
+                    START GAME
+                </MainButton>
             </Card>
         )
     }
@@ -51,9 +58,9 @@ const StartGameScreen = (props) => {
             Keyboard.dismiss();
         }}>
             <View style={styles.screen}>
-                <Text style={styles.title}>Start a New Game</Text>
+                <TitleText style={styles.title}>Start a New Game</TitleText>
                 <Card style={styles.inputContainer}>
-                    <Text>Select a Number</Text>
+                    <BodyText style={styles.text}>Select a Number</BodyText>
                     <Input
                         style={styles.input}
                         blurOnSubmit
@@ -91,9 +98,10 @@ const styles = StyleSheet.create({
         padding: 10,
         alignItems: 'center'
     },
-    title:{
+    title: {
         fontSize: 20,
-        marginVertical: 10
+        marginVertical: 10,
+        fontFamily: 'open-sans-bold'
     },
     inputContainer: {
         width: 300,
@@ -116,6 +124,9 @@ const styles = StyleSheet.create({
     summaryContainer: {
         marginTop: 20,
         alignItems: 'center'
+    },
+    text: {
+        fontFamily: 'open-sans'
     }
 });
 export default StartGameScreen;
